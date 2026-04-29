@@ -4,9 +4,9 @@ import CommentForm from "./CommentForm";
 
 function MainSection() {
   return (
-    <main className="flex flex-col gap-4">
+    <main className="grow flex flex-col gap-4">
       <CommentCard />
-      
+
       <CommentCard />
       <ReplySection />
 
