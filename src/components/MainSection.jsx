@@ -1,14 +1,10 @@
-import CommentCard from "./CommentCard";
-import ReplySection from "./ReplySection";
+import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 
 function MainSection() {
   return (
     <main className="grow flex flex-col gap-4">
-      <CommentCard />
-
-      <CommentCard />
-      <ReplySection />
+      <CommentList />
 
       <CommentForm />
     </main>
