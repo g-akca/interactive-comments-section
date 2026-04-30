@@ -1,10 +1,10 @@
 import VoteSection from "./VoteSection";
 import ReplyButton from "./ReplyButton";
 
-function CommentActions() {
+function CommentActions({ score }) {
   return (
     <div className="flex justify-between items-center">
-      <VoteSection />
+      <VoteSection score={score} />
       <ReplyButton />
     </div>
   )
