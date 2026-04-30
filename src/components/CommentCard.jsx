@@ -1,17 +1,14 @@
 import CommentHeader from "./CommentHeader";
 import CommentActions from "./CommentActions";
 
-function CommentCard() {
+function CommentCard({ comment }) {
   return (
     <div className="bg-white rounded-lg p-4 flex flex-col gap-4">
-      <CommentHeader />
+      <CommentHeader createdAt={comment.createdAt} user={comment.user} />
 
-      <p>
-        Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. 
-        You’ve nailed the design and the responsiveness at various breakpoints works really well.
-      </p>
+      <p>{comment.content}</p>
 
-      <CommentActions />
+      <CommentActions score={comment.score} />
     </div>
   )
 }
