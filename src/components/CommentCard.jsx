@@ -13,7 +13,7 @@ function CommentCard({ comment }) {
 
       <p>{comment.content}</p>
 
-      <CommentActions score={comment.score} />
+      <CommentActions score={comment.score} isOwn={isOwn} />
     </div>
   )
 }
