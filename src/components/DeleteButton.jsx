@@ -2,7 +2,7 @@ import { useState } from "react";
 import deleteIcon from "/images/icon-delete.svg";
 import DeleteModal from "./DeleteModal";
 
-function DeleteButton() {
+function DeleteButton({ onDelete }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -15,6 +15,7 @@ function DeleteButton() {
       {isModalOpen && (
         <DeleteModal
           onCancel={() => setIsModalOpen(false)}
+          onDelete={onDelete}
         />
       )}
     </>

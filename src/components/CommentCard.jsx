@@ -3,7 +3,7 @@ import CommentHeader from "./CommentHeader";
 import CommentActions from "./CommentActions";
 
 function CommentCard({ comment }) {
-  const { currentUser } = useComments();
+  const { currentUser, deleteComment } = useComments();
 
   const isOwn = comment.user.username === currentUser.username;
 
@@ -13,7 +13,7 @@ function CommentCard({ comment }) {
 
       <p>{comment.content}</p>
 
-      <CommentActions score={comment.score} isOwn={isOwn} />
+      <CommentActions score={comment.score} isOwn={isOwn} onDelete={() => deleteComment(comment.id)} />
     </div>
   )
 }

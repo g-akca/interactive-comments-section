@@ -1,4 +1,4 @@
-function DeleteModal({ onCancel }) {
+function DeleteModal({ onCancel, onDelete }) {
   return (
     <div className="fixed inset-0 bg-black/50 p-4 flex justify-center items-center">
       <div className="w-full max-w-100 bg-white px-[25.5px] py-[21.5px] rounded-lg flex flex-col gap-4">
@@ -7,7 +7,7 @@ function DeleteModal({ onCancel }) {
 
         <div className="grid grid-cols-2 gap-4 text-white font-medium">
           <button type="button" onClick={onCancel} className="rounded-lg bg-grey-500 h-12 uppercase">No, cancel</button>
-          <button type="button" className="rounded-lg bg-pink-400 h-12 uppercase">Yes, delete</button>
+          <button type="button" onClick={onDelete} className="rounded-lg bg-pink-400 h-12 uppercase">Yes, delete</button>
         </div>
       </div>
     </div>
