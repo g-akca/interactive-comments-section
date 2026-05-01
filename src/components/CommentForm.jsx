@@ -1,9 +1,31 @@
+import { useComments } from "../context/CommentsContext";
+import { useState } from "react";
 import avatarImg from "/images/avatars/image-juliusomo.png";
 
 function CommentForm() {
+  const { addComment } = useComments();
+  const [content, setContent] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!content.trim()) return;
+
+    addComment(content);
+    setContent("");
+  };
+
   return (
-    <form className="bg-white px-4 py-[14.5px] rounded-lg flex flex-col gap-4">
-      <textarea placeholder="Add a comment..." className="px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 focus:outline-none"></textarea>
+    <form onSubmit={handleSubmit} className="bg-white px-4 py-[14.5px] rounded-lg flex flex-col gap-4">
+      <textarea 
+        value={content}
+        onChange={e => setContent(e.target.value)}
+        placeholder="Add a comment..." 
+        className="
+          px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 
+          duration-150 focus:outline-none focus:border-purple-600
+        "
+      >
+      </textarea>
 
       <div className="flex justify-between items-center">
         <img src={avatarImg} alt="Avatar image" className="w-8 aspect-square rounded-full" />
