@@ -13,7 +13,9 @@ function DeleteButton() {
       </button>
 
       {isModalOpen && (
-        <DeleteModal />
+        <DeleteModal
+          onCancel={() => setIsModalOpen(false)}
+        />
       )}
     </>
   )
