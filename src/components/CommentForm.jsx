@@ -2,17 +2,17 @@ import { useComments } from "../context/CommentsContext";
 import { useState } from "react";
 import avatarImg from "/images/avatars/image-juliusomo.png";
 
-function CommentForm() {
+function CommentForm({ topId = 0 }) {
   const { addComment } = useComments();
   const [content, setContent] = useState("");
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     if (!content.trim()) return;
 
-    addComment(content);
+    addComment({ content });
     setContent("");
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit} className="bg-white px-4 py-[14.5px] rounded-lg flex flex-col gap-4">

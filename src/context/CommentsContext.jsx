@@ -7,7 +7,7 @@ export function CommentsProvider({ children }) {
   const [comments, setComments] = useState(data.comments);
   const [currentUser, setCurrentUser] = useState(data.currentUser);
 
-  function addComment(content = "", createdAt = "now") {
+  function addComment({ topId = 0, content = "", createdAt = "now" }) {
     function findMaxId(comments) {
       let maxId = 0;
 
@@ -24,9 +24,25 @@ export function CommentsProvider({ children }) {
       return maxId;
     }
 
-    setComments(prevComments => [
-      ...prevComments,
-      {
+    function addReply(list, newComment) {
+      return list.map(comment => {
+        const isTopComment = comment.id === topId;
+
+        const isReplyInside = (comment.replies || []).some(reply => reply.id === topId);
+
+        if (isTopComment || isReplyInside) {
+          return {
+            ...comment,
+            replies: [...(comment.replies || []), newComment]
+          };
+        }
+
+        return comment;
+      });
+    }
+
+    setComments(prevComments => {
+      const newComment = {
         id: findMaxId(prevComments) + 1,
         content,
         createdAt,
@@ -34,7 +50,11 @@ export function CommentsProvider({ children }) {
         user: currentUser,
         replies: []
       }
-    ]);
+
+      if (topId <= 0) return [...prevComments, newComment];
+
+      return addReply(prevComments, newComment);
+    });
   }
 
   function deleteComment(id) {
