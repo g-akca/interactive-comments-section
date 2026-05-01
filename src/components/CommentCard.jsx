@@ -21,7 +21,7 @@ function CommentCard({ comment }) {
       </div>
 
       {isReplying && (
-        <CommentForm topId={comment.id} />
+        <CommentForm topId={comment.id} closeForm={() => setIsReplying(false)} />
       )}
     </>
   )

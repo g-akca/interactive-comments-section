@@ -2,7 +2,7 @@ import { useComments } from "../context/CommentsContext";
 import { useState } from "react";
 import avatarImg from "/images/avatars/image-juliusomo.png";
 
-function CommentForm({ topId = 0 }) {
+function CommentForm({ topId = 0, closeForm }) {
   const { addComment } = useComments();
   const [content, setContent] = useState("");
 
@@ -12,6 +12,7 @@ function CommentForm({ topId = 0 }) {
 
     addComment({ content });
     setContent("");
+    closeForm();
   }
 
   return (
