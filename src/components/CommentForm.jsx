@@ -29,7 +29,12 @@ function CommentForm({ topId = 0 }) {
 
       <div className="flex justify-between items-center">
         <img src={avatarImg} alt="Avatar image" className="w-8 aspect-square rounded-full" />
-        <button type="submit" className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase">Send</button>
+        <button 
+          type="submit" 
+          className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase"
+        >
+          {topId !== 0 ? "Reply" : "Send"}
+        </button>
       </div>
     </form>
   )
