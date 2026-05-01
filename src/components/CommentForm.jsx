@@ -10,7 +10,7 @@ function CommentForm({ topId = 0, closeForm }) {
     e.preventDefault();
     if (!content.trim()) return;
 
-    addComment({ content });
+    addComment({ topId, content });
     setContent("");
     closeForm();
   }
