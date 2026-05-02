@@ -3,7 +3,7 @@ import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 import ReplyButton from "./ReplyButton";
 
-function CommentActions({ score, isOwn, onReply, onDelete }) {
+function CommentActions({ score, isOwn, onReply, onDelete, onEdit }) {
   return (
     <div className="flex justify-between items-center">
       <VoteSection score={score} />
@@ -11,10 +11,10 @@ function CommentActions({ score, isOwn, onReply, onDelete }) {
       {isOwn ? (
         <div className="flex gap-4 items-center">
           <DeleteButton onDelete={onDelete} />
-          <EditButton />
+          <EditButton onClick={onEdit} />
         </div>
       ) : (
-        <ReplyButton onReply={onReply} />
+        <ReplyButton onClick={onReply} />
       )}
     </div>
   )
