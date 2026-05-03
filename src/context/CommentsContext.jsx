@@ -84,9 +84,58 @@ export function CommentsProvider({ children }) {
       })
     );
   }
+
+  function voteComment(id, type) {
+    function updateVotes(list) {
+      return list.map(comment => {
+        if (comment.id === id) {
+          let score = comment.score;
+          let upVote = comment.upVote || false;
+          let downVote = comment.downVote || false;
+
+          if (type === "up") {
+            if (!upVote && !downVote) {
+              score += 1;
+              upVote = true;
+            } else if (upVote) {
+              score -= 1;
+              upVote = false;
+            } else if (downVote) {
+              score += 2;
+              upVote = true;
+              downVote = false;
+            }
+          }
+
+          if (type === "down") {
+            if (!upVote && !downVote && score > 0) {
+              score -= 1;
+              downVote = true;
+            } else if (downVote) {
+              score += 1;
+              downVote = false;
+            } else if (upVote && score > 1) {
+              score -= 2;
+              downVote = true;
+              upVote = false;
+            }
+          }
+
+          return { ...comment, score, upVote, downVote };
+        }
+
+        return {
+          ...comment,
+          replies: updateVotes(comment.replies || [])
+        };
+      });
+    }
+
+    setComments(prev => updateVotes(prev));
+  }
   
   return (
-    <CommentsContext.Provider value={{ comments, currentUser, addComment, deleteComment, editComment }}>
+    <CommentsContext.Provider value={{ comments, currentUser, addComment, deleteComment, editComment, voteComment }}>
       {children}
     </CommentsContext.Provider>
   )
