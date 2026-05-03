@@ -6,7 +6,7 @@ import EditForm from "./EditForm";
 import { useState } from "react";
 
 function CommentCard({ comment }) {
-  const { currentUser, deleteComment } = useComments();
+  const { currentUser, deleteComment, editComment } = useComments();
   const [isReplying, setIsReplying] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -18,7 +18,7 @@ function CommentCard({ comment }) {
         <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} />
 
         {isEditing ? (
-          <EditForm original={comment.content} />
+          <EditForm original={comment.content} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
         ) : (
           <p>{comment.content}</p>
         )}
