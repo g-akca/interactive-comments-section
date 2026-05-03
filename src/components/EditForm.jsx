@@ -1,4 +1,4 @@
-function EditForm() {
+function EditForm({ original }) {
   return (
     <form className="flex flex-col gap-4">
       <textarea 
@@ -8,6 +8,7 @@ function EditForm() {
           duration-150 focus:outline-none focus:border-purple-600
         "
       >
+        {original}
       </textarea>
 
       <button 

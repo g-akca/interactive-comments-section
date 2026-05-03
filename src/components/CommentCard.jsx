@@ -18,7 +18,7 @@ function CommentCard({ comment }) {
         <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} />
 
         {isEditing ? (
-          <EditForm />
+          <EditForm original={comment.content} />
         ) : (
           <p>{comment.content}</p>
         )}
