@@ -58,15 +58,14 @@ export function CommentsProvider({ children }) {
   }
 
   function deleteComment(id) {
-    function removeComment(list) {
-      return list.filter(comment => comment.id !== id)
+    setComments(prevComments =>
+      prevComments
+        .filter(comment => comment.id !== id)
         .map(comment => ({
-          ...comment, 
-          replies: removeComment(comment.replies || [])
-        }));
-    }
-
-    setComments(prevComments => removeComment(prevComments));
+          ...comment,
+          replies: (comment.replies || []).filter(reply => reply.id !== id)
+        }))
+    );
   }
 
   function editComment(id, newContent) {
@@ -86,52 +85,50 @@ export function CommentsProvider({ children }) {
   }
 
   function voteComment(id, type) {
-    function updateVotes(list) {
-      return list.map(comment => {
-        if (comment.id === id) {
-          let score = comment.score;
-          let upVote = comment.upVote || false;
-          let downVote = comment.downVote || false;
+    function update(comment) {
+      let score = comment.score;
+      let upVoted = comment.upVoted || false;
+      let downVoted = comment.downVoted || false;
 
-          if (type === "up") {
-            if (!upVote && !downVote) {
-              score += 1;
-              upVote = true;
-            } else if (upVote) {
-              score -= 1;
-              upVote = false;
-            } else if (downVote) {
-              score += 2;
-              upVote = true;
-              downVote = false;
-            }
-          }
-
-          if (type === "down") {
-            if (!upVote && !downVote && score > 0) {
-              score -= 1;
-              downVote = true;
-            } else if (downVote) {
-              score += 1;
-              downVote = false;
-            } else if (upVote && score > 1) {
-              score -= 2;
-              downVote = true;
-              upVote = false;
-            }
-          }
-
-          return { ...comment, score, upVote, downVote };
+      if (type === "up") {
+        if (upVoted) {
+          score -= 1;
+          upVoted = false;
         }
+        else {
+          score += downVoted ? 2 : 1;
+          upVoted = true;
+          downVoted = false;
+        }
+      }
+
+      if (type === "down") {
+        if (downVoted) {
+          score += 1;
+          downVoted = false;
+        }
+        else {
+          score -= upVoted ? 2 : 1;
+          upVoted = false;
+          downVoted = true;
+        }
+      }
+
+      return { ...comment, score, upVoted, downVoted };
+    }
+
+    setComments(prevComments =>
+      prevComments.map(comment => {
+        if (comment.id === id) return update(comment);
 
         return {
           ...comment,
-          replies: updateVotes(comment.replies || [])
-        };
-      });
-    }
-
-    setComments(prev => updateVotes(prev));
+          replies: (comment.replies || []).map(reply =>
+            reply.id === id ? update(reply) : reply
+          )
+        }
+      })
+    );
   }
   
   return (
