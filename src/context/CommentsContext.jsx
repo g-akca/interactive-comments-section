@@ -68,9 +68,25 @@ export function CommentsProvider({ children }) {
 
     setComments(prevComments => removeComment(prevComments));
   }
+
+  function editComment(id, newContent) {
+    setComments(prevComments =>
+      prevComments.map(comment => {
+        if (comment.id === id) return { ...comment, content: newContent }
+
+        const updatedReplies = (comment.replies || []).map(reply =>
+          reply.id === id
+            ? { ...reply, content: newContent }
+            : reply
+        );
+
+        return { ...comment, replies: updatedReplies }
+      })
+    );
+  }
   
   return (
-    <CommentsContext.Provider value={{ comments, currentUser, addComment, deleteComment }}>
+    <CommentsContext.Provider value={{ comments, currentUser, addComment, deleteComment, editComment }}>
       {children}
     </CommentsContext.Provider>
   )
