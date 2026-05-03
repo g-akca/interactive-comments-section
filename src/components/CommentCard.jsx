@@ -23,7 +23,7 @@ function CommentCard({ comment }) {
           <p>{comment.content}</p>
         )}
 
-        <CommentActions score={comment.score} isOwn={isOwn} onReply={() => setIsReplying(true)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(true)} />
+        <CommentActions comment={comment} isOwn={isOwn} onReply={() => setIsReplying(true)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(true)} />
       </div>
 
       {isReplying && (
