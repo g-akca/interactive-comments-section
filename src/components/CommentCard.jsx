@@ -1,9 +1,10 @@
 import { useComments } from "../context/CommentsContext";
+import { useState } from "react";
 import CommentHeader from "./CommentHeader";
 import CommentActions from "./CommentActions";
 import CommentForm from "./CommentForm";
 import EditForm from "./EditForm";
-import { useState } from "react";
+import VoteSection from "./VoteSection";
 
 function CommentCard({ comment }) {
   const { currentUser, deleteComment, editComment } = useComments();
@@ -14,7 +15,7 @@ function CommentCard({ comment }) {
 
   return (
     <>
-      <div className="bg-white rounded-lg p-4 flex flex-col gap-4">
+      <div className="tablet:hidden bg-white rounded-lg p-4 flex flex-col gap-4">
         <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} />
 
         {isEditing ? (
@@ -24,6 +25,20 @@ function CommentCard({ comment }) {
         )}
 
         <CommentActions comment={comment} isOwn={isOwn} onReply={() => setIsReplying(true)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(true)} />
+      </div>
+
+      <div className="hidden tablet:flex bg-white rounded-lg p-[23.5px] flex-row gap-6 items-start">
+        <VoteSection comment={comment} />
+        
+        <div className="grow flex flex-col gap-4">
+          <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} onReply={() => setIsReplying(true)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(true)} />
+
+          {isEditing ? (
+            <EditForm original={comment.content} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
+          ) : (
+            <p>{comment.content}</p>
+          )}
+        </div>
       </div>
 
       {isReplying && (
