@@ -1,5 +1,5 @@
 import { useState } from "react";
-import deleteIcon from "/images/icon-delete.svg";
+import DeleteIcon from "./icons/DeleteIcon";
 import DeleteModal from "./DeleteModal";
 
 function DeleteButton({ onDelete }) {
@@ -7,9 +7,9 @@ function DeleteButton({ onDelete }) {
 
   return (
     <>
-      <button type="button" onClick={() => setIsModalOpen(true)} className="flex gap-2 items-center">
-        <img src={deleteIcon} alt="Delete icon" className="h-3.5" />
-        <span className="text-pink-400 font-medium">Delete</span>
+      <button type="button" onClick={() => setIsModalOpen(true)} className="flex gap-2 items-center text-pink-400 hover:text-pink-200 cursor-pointer transition-all">
+        <DeleteIcon />
+        <span className="font-medium">Delete</span>
       </button>
 
       {isModalOpen && (
