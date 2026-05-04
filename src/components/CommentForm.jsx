@@ -2,7 +2,7 @@ import { useComments } from "../context/CommentsContext";
 import { useState } from "react";
 import avatarImg from "/images/avatars/image-juliusomo.png";
 import React from "react";
-import PostButton from "./PostButton";
+import PostButton from "./ui/PostButton";
 
 function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
   const { addComment } = useComments();

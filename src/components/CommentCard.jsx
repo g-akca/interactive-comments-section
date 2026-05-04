@@ -4,7 +4,7 @@ import CommentHeader from "./CommentHeader";
 import CommentActions from "./CommentActions";
 import CommentForm from "./CommentForm";
 import EditForm from "./EditForm";
-import VoteSection from "./VoteSection";
+import VoteSection from "./ui/VoteSection";
 
 function CommentCard({ comment }) {
   const { currentUser, deleteComment, editComment } = useComments();

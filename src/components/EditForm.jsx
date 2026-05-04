@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PostButton from "./PostButton";
+import PostButton from "./ui/PostButton";
 
 function EditForm({ original, replyingTo, editComment, closeForm }) {
   const mention = replyingTo ? `@${replyingTo} ` : "";

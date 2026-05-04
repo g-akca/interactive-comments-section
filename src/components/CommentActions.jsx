@@ -1,7 +1,7 @@
-import VoteSection from "./VoteSection";
-import DeleteButton from "./DeleteButton";
-import EditButton from "./EditButton";
-import ReplyButton from "./ReplyButton";
+import VoteSection from "./ui/VoteSection";
+import DeleteButton from "./ui/DeleteButton";
+import EditButton from "./ui/EditButton";
+import ReplyButton from "./ui/ReplyButton";
 
 function CommentActions({ comment, isOwn, onReply, onDelete, onEdit }) {
   return (

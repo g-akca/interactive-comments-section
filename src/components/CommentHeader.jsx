@@ -1,6 +1,6 @@
-import DeleteButton from "./DeleteButton";
-import EditButton from "./EditButton";
-import ReplyButton from "./ReplyButton";
+import DeleteButton from "./ui/DeleteButton";
+import EditButton from "./ui/EditButton";
+import ReplyButton from "./ui/ReplyButton";
 
 function CommentHeader({ createdAt, user, isOwn, onReply, onDelete, onEdit }) {
   return (

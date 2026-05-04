@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteIcon from "./icons/DeleteIcon";
-import DeleteModal from "./DeleteModal";
+import DeleteModal from "../DeleteModal";
 
 function DeleteButton({ onDelete }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
