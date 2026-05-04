@@ -7,7 +7,11 @@ function DeleteButton({ onDelete }) {
 
   return (
     <>
-      <button type="button" onClick={() => setIsModalOpen(true)} className="flex gap-2 items-center text-pink-400 hover:text-pink-200 cursor-pointer transition-all">
+      <button 
+        type="button" 
+        onClick={() => setIsModalOpen(true)} 
+        className="flex gap-2 items-center text-pink-400 hover:text-pink-200 cursor-pointer transition-all"
+      >
         <DeleteIcon />
         <span className="font-medium">Delete</span>
       </button>

@@ -16,33 +16,70 @@ function CommentCard({ comment }) {
   return (
     <>
       <div className="tablet:hidden bg-white rounded-lg p-4 flex flex-col gap-4">
-        <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} />
+        <CommentHeader 
+          createdAt={comment.createdAt} 
+          user={comment.user} 
+          isOwn={isOwn} 
+        />
 
         {isEditing ? (
-          <EditForm original={comment.content} replyingTo={comment.replyingTo} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
+          <EditForm 
+            original={comment.content} 
+            replyingTo={comment.replyingTo} 
+            editComment={(newComment) => editComment(comment.id, newComment)} 
+            closeForm={() => setIsEditing(false)} 
+          />
         ) : (
-          <p>{comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} {comment.content}</p>
+          <p>
+            {comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} 
+            {comment.content}
+          </p>
         )}
 
-        <CommentActions comment={comment} isOwn={isOwn} onReply={() => setIsReplying(prev => !prev)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(prev => !prev)} />
+        <CommentActions 
+          comment={comment} 
+          isOwn={isOwn} 
+          onReply={() => setIsReplying(prev => !prev)} 
+          onDelete={() => deleteComment(comment.id)} 
+          onEdit={() => setIsEditing(prev => !prev)} 
+        />
       </div>
 
       <div className="hidden tablet:flex bg-white rounded-lg p-[23.5px] flex-row gap-6 items-start">
         <VoteSection comment={comment} />
         
         <div className="grow flex flex-col gap-4">
-          <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} onReply={() => setIsReplying(prev => !prev)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(prev => !prev)} />
+          <CommentHeader 
+            createdAt={comment.createdAt} 
+            user={comment.user} 
+            isOwn={isOwn} 
+            onReply={() => setIsReplying(prev => !prev)} 
+            onDelete={() => deleteComment(comment.id)} 
+            onEdit={() => setIsEditing(prev => !prev)} 
+          />
 
           {isEditing ? (
-            <EditForm original={comment.content} replyingTo={comment.replyingTo} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
+            <EditForm 
+              original={comment.content} 
+              replyingTo={comment.replyingTo} 
+              editComment={(newComment) => editComment(comment.id, newComment)} 
+              closeForm={() => setIsEditing(false)} 
+            />
           ) : (
-            <p>{comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} {comment.content}</p>
+            <p>
+              {comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} 
+              {comment.content}
+            </p>
           )}
         </div>
       </div>
 
       {isReplying && (
-        <CommentForm topId={comment.id} replyingTo={comment.user.username} closeForm={() => setIsReplying(false)} />
+        <CommentForm 
+          topId={comment.id} 
+          replyingTo={comment.user.username} 
+          closeForm={() => setIsReplying(false)} 
+        />
       )}
     </>
   )
