@@ -2,6 +2,7 @@ import { useComments } from "../context/CommentsContext";
 import { useState } from "react";
 import avatarImg from "/images/avatars/image-juliusomo.png";
 import React from "react";
+import PostButton from "./PostButton";
 
 function CommentForm({ topId = 0, closeForm }) {
   const { addComment } = useComments();
@@ -33,12 +34,10 @@ function CommentForm({ topId = 0, closeForm }) {
         <div className="flex justify-between items-center">
           <img src={avatarImg} alt="Avatar image" className="w-8 aspect-square rounded-full" />
 
-          <button 
-            type="submit" 
-            className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase cursor-pointer hover:bg-purple-200 transition-all"
-          >
-            {topId !== 0 ? "Reply" : "Send"}
-          </button>
+          <PostButton
+            isDisabled={!content.trim()}
+            innerText={topId !== 0 ? "Reply" : "Send"}
+          />
         </div>
       </div>
 
@@ -56,12 +55,10 @@ function CommentForm({ topId = 0, closeForm }) {
         >
         </textarea>
 
-        <button 
-          type="submit" 
-          className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase cursor-pointer hover:bg-purple-200 transition-all"
-        >
-          {topId !== 0 ? "Reply" : "Send"}
-        </button>
+        <PostButton
+          isDisabled={!content.trim()}
+          innerText={topId !== 0 ? "Reply" : "Send"}
+        />
       </div>
     </form>
   )

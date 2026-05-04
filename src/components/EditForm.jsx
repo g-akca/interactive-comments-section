@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PostButton from "./PostButton";
 
 function EditForm({ original, editComment, closeForm }) {
   const [newComment, setNewComment] = useState(original);
@@ -24,12 +25,11 @@ function EditForm({ original, editComment, closeForm }) {
       >
       </textarea>
 
-      <button 
-        type="submit" 
-        className="self-end bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase cursor-pointer hover:bg-purple-200 transition-all"
-      >
-        Update
-      </button>
+      <PostButton
+        isDisabled={!newComment.trim()}
+        innerText="Update"
+        className="self-end"
+      />      
     </form>
   )
 }
