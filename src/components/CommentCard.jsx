@@ -19,7 +19,7 @@ function CommentCard({ comment }) {
         <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} />
 
         {isEditing ? (
-          <EditForm original={comment.content} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
+          <EditForm original={comment.content} replyingTo={comment.replyingTo} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
         ) : (
           <p>{comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} {comment.content}</p>
         )}
@@ -34,7 +34,7 @@ function CommentCard({ comment }) {
           <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} onReply={() => setIsReplying(prev => !prev)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(prev => !prev)} />
 
           {isEditing ? (
-            <EditForm original={comment.content} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
+            <EditForm original={comment.content} replyingTo={comment.replyingTo} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
           ) : (
             <p>{comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} {comment.content}</p>
           )}
@@ -42,7 +42,7 @@ function CommentCard({ comment }) {
       </div>
 
       {isReplying && (
-        <CommentForm topId={comment.id} closeForm={() => setIsReplying(false)} />
+        <CommentForm topId={comment.id} replyingTo={comment.user.username} closeForm={() => setIsReplying(false)} />
       )}
     </>
   )

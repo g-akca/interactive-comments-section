@@ -1,14 +1,32 @@
 import { useState } from "react";
 import PostButton from "./PostButton";
 
-function EditForm({ original, editComment, closeForm }) {
-  const [newComment, setNewComment] = useState(original);
+function EditForm({ original, replyingTo, editComment, closeForm }) {
+  const mention = replyingTo ? `@${replyingTo} ` : "";
+
+  const [newComment, setNewComment] = useState(mention ? mention + original : original);
+
+  function handleChange(e) {
+    let value = e.target.value;
+
+    if (mention && !value.startsWith(mention)) {
+      value = mention;
+    }
+
+    setNewComment(value);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!newComment.trim()) return;
 
-    editComment(newComment);
+    let cleanContent = newComment;
+
+    if (mention && newComment.startsWith(mention)) {
+      cleanContent = newComment.slice(mention.length);
+    }
+
+    editComment(cleanContent);
     closeForm();
   }
 
@@ -16,7 +34,7 @@ function EditForm({ original, editComment, closeForm }) {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <textarea 
         value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
+        onChange={handleChange}
         placeholder="Edit your comment..." 
         className="
           px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 

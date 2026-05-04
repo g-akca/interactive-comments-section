@@ -4,15 +4,36 @@ import avatarImg from "/images/avatars/image-juliusomo.png";
 import React from "react";
 import PostButton from "./PostButton";
 
-function CommentForm({ topId = 0, closeForm }) {
+function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
   const { addComment } = useComments();
-  const [content, setContent] = useState("");
+  const initialText = replyingTo ? `@${replyingTo} ` : "";
+  const [content, setContent] = useState(initialText);
+
+  function handleChange(e) {
+    let value = e.target.value;
+
+    if (initialText && !value.startsWith(initialText)) {
+      value = initialText;
+    }
+
+    setContent(value);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!content.trim()) return;
 
-    addComment({ topId, content });
+    let cleanContent = content;
+
+    if (replyingTo) {
+      const mention = `@${replyingTo} `;
+      
+      if (content.startsWith(mention)) {
+        cleanContent = content.slice(mention.length);
+      }
+    }
+
+    addComment({ topId, content: cleanContent });
     setContent("");
     closeForm();
   }
@@ -22,7 +43,7 @@ function CommentForm({ topId = 0, closeForm }) {
       <div className="flex flex-col gap-4 tablet:hidden">
         <textarea 
           value={content}
-          onChange={e => setContent(e.target.value)}
+          onChange={handleChange}
           placeholder="Add a comment..." 
           className="
             px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 
@@ -46,7 +67,7 @@ function CommentForm({ topId = 0, closeForm }) {
 
         <textarea 
           value={content}
-          onChange={e => setContent(e.target.value)}
+          onChange={handleChange}
           placeholder="Add a comment..." 
           className="
             grow px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 
