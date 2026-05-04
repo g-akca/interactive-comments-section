@@ -1,11 +1,26 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import data from "../data/data.json";
 
 const CommentsContext = createContext();
 
 export function CommentsProvider({ children }) {
-  const [comments, setComments] = useState(data.comments);
-  const [currentUser, setCurrentUser] = useState(data.currentUser);
+  const [comments, setComments] = useState(() => {
+    const saved = localStorage.getItem("comments");
+    return saved ? JSON.parse(saved) : data.comments;
+  });
+
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem("currentUser");
+    return saved ? JSON.parse(saved) : data.currentUser;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("comments", JSON.stringify(comments));
+  }, [comments]);
+
+  useEffect(() => {
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  }, [currentUser]);
 
   function addComment({ topId = 0, content = "", createdAt = "now" }) {
     function findMaxId(comments) {
