@@ -1,8 +1,11 @@
 import DeleteButton from "./ui/DeleteButton";
 import EditButton from "./ui/EditButton";
 import ReplyButton from "./ui/ReplyButton";
+import useTimeAgo from "../hooks/useTimeAgo";
 
 function CommentHeader({ createdAt, user, isOwn, onReply, onDelete, onEdit }) {
+  const timeLabel = useTimeAgo(createdAt);
+
   return (
     <div className="flex gap-4 justify-between">
       <div className="flex gap-4 items-center">
@@ -21,7 +24,7 @@ function CommentHeader({ createdAt, user, isOwn, onReply, onDelete, onEdit }) {
           )}
         </div>
 
-        <span>{createdAt}</span>
+        <span>{timeLabel}</span>
       </div>
       
       <div className="hidden tablet:flex gap-6 items-center">

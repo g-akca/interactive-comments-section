@@ -22,7 +22,7 @@ export function CommentsProvider({ children }) {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
   }, [currentUser]);
 
-  function addComment({ topId = 0, content = "", createdAt = "now" }) {
+  function addComment({ topId = 0, content = "", createdAt = new Date().toISOString() }) {
     function findMaxId(comments) {
       let maxId = 0;
 
