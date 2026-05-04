@@ -6,8 +6,8 @@ function DeleteModal({ onCancel, onDelete }) {
         <p className="text-grey-500">Are you sure you want to delete this comment? This will remove the comment and can’t be undone.</p>
 
         <div className="grid grid-cols-2 gap-4 text-white font-medium">
-          <button type="button" onClick={onCancel} className="rounded-lg bg-grey-500 h-12 uppercase">No, cancel</button>
-          <button type="button" onClick={onDelete} className="rounded-lg bg-pink-400 h-12 uppercase">Yes, delete</button>
+          <button type="button" onClick={onCancel} className="rounded-lg bg-grey-500 h-12 uppercase cursor-pointer hover:bg-gray-300 transition-all">No, cancel</button>
+          <button type="button" onClick={onDelete} className="rounded-lg bg-pink-400 h-12 uppercase cursor-pointer hover:bg-pink-200 transition-all">Yes, delete</button>
         </div>
       </div>
     </div>

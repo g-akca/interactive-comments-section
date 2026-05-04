@@ -26,7 +26,7 @@ function EditForm({ original, editComment, closeForm }) {
 
       <button 
         type="submit" 
-        className="self-end bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase"
+        className="self-end bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase cursor-pointer hover:bg-purple-200 transition-all"
       >
         Update
       </button>

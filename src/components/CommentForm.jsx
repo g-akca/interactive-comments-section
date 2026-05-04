@@ -32,9 +32,10 @@ function CommentForm({ topId = 0, closeForm }) {
 
         <div className="flex justify-between items-center">
           <img src={avatarImg} alt="Avatar image" className="w-8 aspect-square rounded-full" />
+
           <button 
             type="submit" 
-            className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase"
+            className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase cursor-pointer hover:bg-purple-200 transition-all"
           >
             {topId !== 0 ? "Reply" : "Send"}
           </button>
@@ -57,7 +58,7 @@ function CommentForm({ topId = 0, closeForm }) {
 
         <button 
           type="submit" 
-          className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase"
+          className="bg-purple-600 w-26 h-12 rounded-lg flex justify-center items-center font-medium text-white uppercase cursor-pointer hover:bg-purple-200 transition-all"
         >
           {topId !== 0 ? "Reply" : "Send"}
         </button>
