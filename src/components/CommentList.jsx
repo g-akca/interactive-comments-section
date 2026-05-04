@@ -7,7 +7,7 @@ function CommentList() {
   const { comments } = useComments();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 tablet:gap-6">
       {comments.map(comment => (
         comment.replies.length ? (
           <React.Fragment key={comment.id}>
