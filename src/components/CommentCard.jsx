@@ -24,14 +24,14 @@ function CommentCard({ comment }) {
           <p>{comment.content}</p>
         )}
 
-        <CommentActions comment={comment} isOwn={isOwn} onReply={() => setIsReplying(true)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(true)} />
+        <CommentActions comment={comment} isOwn={isOwn} onReply={() => setIsReplying(prev => !prev)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(prev => !prev)} />
       </div>
 
       <div className="hidden tablet:flex bg-white rounded-lg p-[23.5px] flex-row gap-6 items-start">
         <VoteSection comment={comment} />
         
         <div className="grow flex flex-col gap-4">
-          <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} onReply={() => setIsReplying(true)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(true)} />
+          <CommentHeader createdAt={comment.createdAt} user={comment.user} isOwn={isOwn} onReply={() => setIsReplying(prev => !prev)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(prev => !prev)} />
 
           {isEditing ? (
             <EditForm original={comment.content} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
