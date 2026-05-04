@@ -21,7 +21,7 @@ function CommentCard({ comment }) {
         {isEditing ? (
           <EditForm original={comment.content} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
         ) : (
-          <p>{comment.content}</p>
+          <p>{comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} {comment.content}</p>
         )}
 
         <CommentActions comment={comment} isOwn={isOwn} onReply={() => setIsReplying(prev => !prev)} onDelete={() => deleteComment(comment.id)} onEdit={() => setIsEditing(prev => !prev)} />
@@ -36,7 +36,7 @@ function CommentCard({ comment }) {
           {isEditing ? (
             <EditForm original={comment.content} editComment={(newComment) => editComment(comment.id, newComment)} closeForm={() => setIsEditing(false)} />
           ) : (
-            <p>{comment.content}</p>
+            <p>{comment.replyingTo && <span className="font-medium text-purple-600">@{comment.replyingTo} </span>} {comment.content}</p>
           )}
         </div>
       </div>
