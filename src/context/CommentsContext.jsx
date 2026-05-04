@@ -41,14 +41,29 @@ export function CommentsProvider({ children }) {
       });
     }
 
+    function findUserById(comments, id) {
+      for (const comment of comments) {
+        if (comment.id === id) return comment.user.username;
+
+        for (const reply of comment.replies || []) {
+          if (reply.id === id) return reply.user.username;
+        }
+      }
+      
+      return null;
+    }
+
     setComments(prevComments => {
+      const replyingTo = topId > 0 ? findUserById(prevComments, topId) : null;
+
       const newComment = {
         id: findMaxId(prevComments) + 1,
         content,
         createdAt,
         score: 0,
         user: currentUser,
-        replies: []
+        replies: [],
+        ...(replyingTo && { replyingTo })
       }
 
       if (topId <= 0) return [...prevComments, newComment];
