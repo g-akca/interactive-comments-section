@@ -49,8 +49,7 @@ function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
             px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 
             text-grey-800 caret-purple-600 duration-150 focus:outline-none focus:border-purple-600
           "
-        >
-        </textarea>
+        />
 
         <div className="flex justify-between items-center">
           <img src={avatarImg} alt="Avatar image" className="w-8 aspect-square rounded-full" />
@@ -73,8 +72,7 @@ function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
             grow px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 
             text-grey-800 caret-purple-600 duration-150 focus:outline-none focus:border-purple-600
           "
-        >
-        </textarea>
+        />
 
         <PostButton
           isDisabled={!content.trim()}
