@@ -44,6 +44,7 @@ function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
           value={content}
           onChange={handleChange}
           placeholder="Add a comment..." 
+          aria-label="Add a comment"
           className="
             px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 
             text-grey-800 caret-purple-600 duration-150 focus:outline-none focus:border-purple-600
@@ -67,6 +68,7 @@ function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
           value={content}
           onChange={handleChange}
           placeholder="Add a comment..." 
+          aria-label="Add a comment"
           className="
             grow px-4 py-2 h-24 border-grey-100 border rounded-lg resize-none placeholder:text-grey-500 
             text-grey-800 caret-purple-600 duration-150 focus:outline-none focus:border-purple-600
