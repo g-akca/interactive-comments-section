@@ -3,22 +3,26 @@ import data from "../data/data.json";
 
 const CommentsContext = createContext();
 
-function safeParse(key, fallback) {
+function safeParse(key, fallback, isValid) {
   const saved = localStorage.getItem(key);
 
   if (!saved) return fallback;
 
   try {
-    return JSON.parse(saved);
+    const parsed = JSON.parse(saved);
+
+    return isValid(parsed) ? parsed : fallback;
   } catch {
     return fallback;
   }
 }
 
-export function CommentsProvider({ children }) {
-  const [comments, setComments] = useState(() => safeParse("comments", data.comments));
+const isPlainObject = value => typeof value === "object" && value !== null && !Array.isArray(value);
 
-  const [currentUser] = useState(() => safeParse("currentUser", data.currentUser));
+export function CommentsProvider({ children }) {
+  const [comments, setComments] = useState(() => safeParse("comments", data.comments, Array.isArray));
+
+  const [currentUser] = useState(() => safeParse("currentUser", data.currentUser, isPlainObject));
 
   useEffect(() => {
     localStorage.setItem("comments", JSON.stringify(comments));
