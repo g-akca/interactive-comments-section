@@ -18,13 +18,13 @@ function EditForm({ original, replyingTo, editComment, closeForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!newComment.trim()) return;
-
     let cleanContent = newComment;
 
     if (mention && newComment.startsWith(mention)) {
       cleanContent = newComment.slice(mention.length);
     }
+
+    if (!cleanContent.trim()) return;
 
     editComment(cleanContent);
     closeForm();

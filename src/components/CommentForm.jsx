@@ -20,8 +20,6 @@ function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!content.trim()) return;
-
     let cleanContent = content;
 
     if (replyingTo) {
@@ -31,6 +29,8 @@ function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
         cleanContent = content.slice(mention.length);
       }
     }
+
+    if (!cleanContent.trim()) return;
 
     addComment({ topId, content: cleanContent });
     setContent("");
