@@ -12,16 +12,16 @@ function VoteSection({ comment }) {
         flex tablet:flex-col justify-between items-center gap-4 tablet:shrink-0
       "
     >
-      <button type="button" onClick={() => voteComment(comment.id, "up")} aria-label="Upvote comment" className="cursor-pointer">
+      <button type="button" onClick={() => voteComment(comment.id, "up")} aria-label="Upvote comment" aria-pressed={comment.upVoted || false} className="cursor-pointer">
         <PlusIcon 
           aria-hidden="true"
           className={`${comment.upVoted ? "text-purple-600" : "text-purple-200"} hover:text-purple-600 transition-all`}
         />
       </button>
 
-      <span className="font-medium text-purple-600">{comment.score}</span>
+      <span className="font-medium text-purple-600" aria-live="polite" aria-atomic="true">{comment.score}</span>
 
-      <button type="button" onClick={() => voteComment(comment.id, "down")} aria-label="Downvote comment" className="cursor-pointer">
+      <button type="button" onClick={() => voteComment(comment.id, "down")} aria-label="Downvote comment" aria-pressed={comment.downVoted || false} className="cursor-pointer">
         <MinusIcon 
           aria-hidden="true"
           className={`${comment.downVoted ? "text-purple-600" : "text-purple-200"} hover:text-purple-600 transition-all`}
