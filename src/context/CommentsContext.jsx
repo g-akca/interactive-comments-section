@@ -18,7 +18,7 @@ function safeParse(key, fallback) {
 export function CommentsProvider({ children }) {
   const [comments, setComments] = useState(() => safeParse("comments", data.comments));
 
-  const [currentUser, setCurrentUser] = useState(() => safeParse("currentUser", data.currentUser));
+  const [currentUser] = useState(() => safeParse("currentUser", data.currentUser));
 
   useEffect(() => {
     localStorage.setItem("comments", JSON.stringify(comments));
