@@ -1,7 +1,6 @@
 import { useComments } from "../context/CommentsContext";
 import { useState } from "react";
 import avatarImg from "/images/avatars/image-juliusomo.png";
-import React from "react";
 import PostButton from "./ui/PostButton";
 
 function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
@@ -35,7 +34,7 @@ function CommentForm({ topId = 0, replyingTo = "", closeForm }) {
 
     addComment({ topId, content: cleanContent });
     setContent("");
-    closeForm();
+    closeForm?.();
   }
 
   return (
